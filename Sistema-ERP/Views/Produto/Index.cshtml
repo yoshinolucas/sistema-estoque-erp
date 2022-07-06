@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Produtos";
+}
+
+<div class="text-center">
+
+    
+
+    <h1 class="display-4">Lista de produtos</h1>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" role="button" asp-controller="Produto"
+        asp-action="CriarProduto">Novo Produto</a>
+    </div>
+
+
+    <table class="table table-striped mt-3">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>mdo</td>
+          <td>
+            <div class="btn-group" role="group">
+                <a class="btn btn-warning" role="button" asp-controller="Produto"
+                asp-action="EditarProduto">Editar</a>
+                <a role="button" class="btn btn-danger" asp-controller="Produto"
+                asp-action="ExcluirProduto">Apagar</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>fat</td>
+          <td>
+            <div class="btn-group" role="group">
+                <a role="button" class="btn btn-warning" asp-controller="Produto"
+                asp-action="EditarProduto">Editar</a>
+                <a role="button" class="btn btn-danger" asp-controller="Produto"
+                asp-action="ExcluirProduto">Apagar</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+

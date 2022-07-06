@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Confirmação apagar";
+}
+
+<div class="text-center">
+    <h3>Deseja realmente apagar o produto ()?</h3>
+</div>
+
+
+<a class="btn btn-warning btn-block" role="button" asp-controller="Produto" asp-action="Index">Cancelar</a>
+<a class="btn btn-outline-danger btn-block" role="button"
+asp-controller="Produto" asp-action="ExcluirProdutoDefinitivo">Confirmar</a>
