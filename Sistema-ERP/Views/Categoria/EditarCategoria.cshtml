@@ -5,18 +5,22 @@
 
 <div class="text-center">
 
-    <h1 class="display-4">Editar Categoria</h1>
+    <h1 class="display-4 text-light">Editar Categoria</h1>
     
 </div>
 
 <div class="container">
-    <form asp-controller="Categoria" asp-action="EditarCategoria" method="post">
+    <form class="d-grid gap-2 col-6 mx-auto text-light" asp-controller="Categoria" asp-action="EditarCategoria" method="post">
         <input asp-for="Id_Categoria" hidden/>
         <div class="form-group">
             <label for="nome">Nome</label>
             <input class="form-control" type="text" asp-for="Nome" placeholder="Digite o nome da categoria"/>
-        </div>       
-        <button type="submit" class="btn btn-primary btn-block">Alterar</button>
-        <a class="btn btn-warning btn-block" asp-controller="Categoria" asp-action="Index">Voltar</a>
+            @Html.ValidationMessageFor(x => x.Nome)
+        </div>    
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary btn-block">Alterar</button>
+            <a class="btn btn-outline-warning btn-block" asp-controller="Categoria" asp-action="Index">Voltar</a>
+        </div>
+        
     </form>
 </div>

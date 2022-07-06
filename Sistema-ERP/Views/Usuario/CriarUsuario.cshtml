@@ -1,0 +1,52 @@
+﻿@using Sistema_ERP.Enums
+@model Usuario
+@{
+    ViewData["Title"] = "Cadastrar Usuario";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4 text-light">Cadastrar Usuário</h1>
+    
+</div>
+
+<div class="container">
+    <form class="text-light d-grid gap-2 col-6 mx-auto" asp-controller="Usuario" asp-action="CriarUsuario" method="post">
+              
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do usuário"/>
+            @Html.ValidationMessageFor(x => x.Nome)
+        </div>      
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" asp-for="Email" class="form-control" placeholder="Digite o e-mail do usuário"/>
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+         <div class="form-group">
+            <label for="login">Login</label>
+            <input type="text" asp-for="Login" class="form-control" placeholder="Digite o login do usuário"/>
+            @Html.ValidationMessageFor(x => x.Login)
+        </div>
+         <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" asp-for="Senha" class="form-control" placeholder="Digite a senha do usuário"/>
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+        <div class="form-group">
+            <label for="perfil" class="form-label">Perfil</label>
+            <br />
+            <select asp-for="Perfil" class="form-control">       
+                <option value="Selecionar">Selecionar</option>
+                <option value="@PerfilEnum.Admin">Admin</option>
+                <option value="@PerfilEnum.Normal">Normal</option>
+            </select>
+            @Html.ValidationMessageFor(x => x.Perfil)
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+            <a class="btn btn-outline-warning btn-block" asp-controller="Usuario" asp-action="Index">Voltar</a>
+        </div>
+        
+    </form>
+</div>

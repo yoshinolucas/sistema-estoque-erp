@@ -14,9 +14,13 @@ namespace Sistema_ERP.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var data = await _unitOfWork.Categorias.GetAllAsync();
+            var data = await _unitOfWork
+                .Categorias
+                .GetAllAsync();
             return View(data);
         }
 
@@ -29,8 +33,14 @@ namespace Sistema_ERP.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarCategoria(Categoria categoria)
         {
-            await _unitOfWork.Categorias.AddAsync(categoria);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _unitOfWork.Categorias.AddAsync(categoria);
+                TempData["CategoriaCriada"] = $"Categoria {categoria.Nome} criada com sucesso!";
+                return RedirectToAction("Index");
+            }
+            return View(categoria);
+            
         }
 
         [HttpGet]
@@ -43,8 +53,14 @@ namespace Sistema_ERP.Controllers
         [HttpPost]
         public async Task<IActionResult> EditarCategoria(Categoria categoria)
         {
-            await _unitOfWork.Categorias.UpdateAsync(categoria);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _unitOfWork.Categorias.UpdateAsync(categoria);
+                TempData["CategoriaEditada"] = $"Categoria {categoria.Nome} editada com sucesso!";
+                return RedirectToAction("Index");
+            }
+            return View(categoria);
+            
         }
 
         [HttpGet]
@@ -57,6 +73,7 @@ namespace Sistema_ERP.Controllers
         public async Task<IActionResult> ExcluirCategoriaDefinitivo(int id)
         {
             await _unitOfWork.Categorias.DeleteAsync(id);
+            TempData["CategoriaExcluida"] = $"Categoria excluída com sucesso!";
             return RedirectToAction("Index");
         }
     }

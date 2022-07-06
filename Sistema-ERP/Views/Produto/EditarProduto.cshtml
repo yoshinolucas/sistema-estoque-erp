@@ -5,34 +5,40 @@
 
 <div class="text-center">
 
-    <h1 class="display-4">Editar Produto</h1>
+    <h1 class="display-4 text-light">Editar Produto</h1>
     
 </div>
 
 <div class="container">
-    <form asp-controller="Produto" asp-action="EditarProduto" method="post">
+    <form class="d-grid gap-2 col-6 mx-auto text-light" asp-controller="Produto" asp-action="EditarProduto" method="post">
         <input asp-for="Id_Produto" hidden/>
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input asp-for="Nome" class="form-control" placeholder="Digite o nome do produto"/>
+            <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do produto"/>
+            @Html.ValidationMessageFor(x => x.Nome)
         </div>
         <div class="form-group">
             <label for="preco">Preço</label>
-            <input asp-for="Preco" class="form-control" placeholder="Digite o valor do produto"/>
+            <input type="number" asp-for="Preco" class="form-control" placeholder="Digite o valor do produto"/>
+            @Html.ValidationMessageFor(x => x.Preco)
         </div>
          <div class="form-group">
             <label for="estoque">Estoque</label>
-            <input asp-for="Estoque" class="form-control" placeholder="Digite o estoque atualizado"/>
+            <input type="number" asp-for="Estoque" class="form-control" placeholder="Digite o estoque atualizado"/>
+            @Html.ValidationMessageFor(x => x.Preco)
         </div>
         <div class="form-group">
-            <label>Categoria</label>
-            <br />
-            <select asp-for="Id_Categoria" asp-items="ViewBag.opcoesCategoria" class="form-select" aria-label="Default select example">       
+            <label for="categoria" class="form-label">Categoria</label>
+            <select asp-for="Id_Categoria" asp-items="ViewBag.opcoesCategoria" class="form-control">       
                 <option selected>Selecionar</option>
             </select>
+            @Html.ValidationMessageFor(x => x.Id_Categoria)
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Alterar</button>
-        <a class="btn btn-warning btn-block" asp-controller="Produto" asp-action="Index">Voltar</a>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+            <a class="btn btn-outline-warning btn-block" asp-controller="Produto" asp-action="Index">Cancelar</a>
+        </div>
+        
     </form>
 </div>

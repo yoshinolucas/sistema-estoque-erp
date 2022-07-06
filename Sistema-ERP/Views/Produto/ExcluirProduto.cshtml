@@ -3,11 +3,13 @@
     ViewData["Title"] = "Confirmação apagar";
 }
 
-<div class="text-center">
+<div class="text-center text-light d-grid gap-2 col-6 mx-auto">
     <h3>Deseja realmente apagar o produto (@Model.Nome)?</h3>
 </div>
 
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a class="btn btn-warning btn-block" role="button" asp-controller="Produto" asp-action="Index">Cancelar</a>
+    <a class="btn btn-outline-danger btn-block" role="button"
+    asp-controller="Produto" asp-action="ExcluirProdutoDefinitivo" asp-route-id="@Model.Id_Produto">Confirmar</a>
+</div>
 
-<a class="btn btn-warning btn-block" role="button" asp-controller="Produto" asp-action="Index">Cancelar</a>
-<a class="btn btn-outline-danger btn-block" role="button"
-asp-controller="Produto" asp-action="ExcluirProdutoDefinitivo" asp-route-id="@Model.Id_Produto">Confirmar</a>

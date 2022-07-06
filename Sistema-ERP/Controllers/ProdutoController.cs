@@ -27,16 +27,23 @@ namespace Sistema_ERP.Controllers
         {
             var data = await _inutOfWork.Categorias.GetAllAsync();
             ViewData["opcoesCategoria"] = new SelectList(data.ToList(), "Id_Categoria", "Nome");
+            
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> CriarProduto(Produto produto)
         {
-            await _inutOfWork.Produtos.AddAsync(produto);
-            var data = await _inutOfWork.Categorias.GetAllAsync();
-            ViewData["opcoesCategoria"] = new SelectList(data.ToList(), "Id_Categoria", "Nome", produto.Id_Categoria);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _inutOfWork.Produtos.AddAsync(produto);
+                var data = await _inutOfWork.Categorias.GetAllAsync();
+                ViewData["opcoesCategoria"] = new SelectList(data.ToList(), "Id_Categoria", "Nome", produto.Id_Categoria);
+                TempData["ProdutoCriado"] = $"Produto {produto.Nome} criado com sucesso!";
+                return RedirectToAction("Index");
+            }
+            return View(produto);
+            
         }
 
         [HttpGet]
@@ -50,14 +57,21 @@ namespace Sistema_ERP.Controllers
         [HttpPost]
         public async Task<IActionResult> EditarProduto(Produto produto)
         {
-            await _inutOfWork.Produtos.UpdateAsync(produto);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _inutOfWork.Produtos.UpdateAsync(produto);
+                TempData["ProdutoEditado"] = $"Produto {produto.Nome} editado com sucesso!";
+                return RedirectToAction("Index");
+            }
+            return View(produto);
+            
         }
 
 
         [HttpGet]
         public async Task<IActionResult> ExcluirProduto(int id)
         {
+
             Produto produto = await _inutOfWork.Produtos.GetByIdAsync(id);
             return View(produto);
         }
@@ -65,6 +79,7 @@ namespace Sistema_ERP.Controllers
         public async Task<IActionResult> ExcluirProdutoDefinitivo(int id)
         {
             await _inutOfWork.Produtos.DeleteAsync(id);
+            TempData["ProdutoExcluido"] = $"Produto excluído com sucesso!";
             return RedirectToAction("Index");
         }
     }

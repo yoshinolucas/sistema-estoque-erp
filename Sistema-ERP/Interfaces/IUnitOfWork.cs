@@ -4,5 +4,6 @@
     {
         ICategoriaRepository Categorias { get; }
         IProdutoRepository Produtos { get; }
+        IUsuarioRepository Usuarios { get; }
     }
 }

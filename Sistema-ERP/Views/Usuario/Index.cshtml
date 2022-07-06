@@ -1,0 +1,64 @@
+﻿@model IReadOnlyList<Sistema_ERP.Models.Usuario>
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<div class="text-center">
+
+    @if (TempData["UsuarioCriado"] != null)
+    {
+        <p class="alert alert-success">@TempData["UsuarioCriado"].ToString()</p>
+    }
+    @if (TempData["UsuarioEditado"] != null)
+    {
+        <p class="alert alert-info">@TempData["UsuarioEditado"].ToString()</p>
+    }
+    @if (TempData["UsuarioExcluido"] != null)
+    {
+        <p class="alert alert-danger">@TempData["UsuarioExcluido"].ToString()</p>
+    }
+    
+
+    <h1 class="display-4 text-light">Lista de usuários</h1>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" role="button" asp-controller="Usuario"
+        asp-action="CriarUsuario">Novo Usuário</a>
+    </div>
+
+
+    <table class="table table-dark table-hover table-striped mt-3">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Login</th>
+          <th scope="col">Email</th>
+          <th scope="col">Perfil</th>
+          <th scope="col">Opções</th>
+          
+        </tr>
+      </thead>
+          <tbody>
+            @foreach(var usuario in Model)
+            {
+                <tr>
+                    <th scope="row">@usuario.Id_Usuario</th>
+                    <td>@usuario.Nome</td>
+                    <td>@usuario.Login</td>
+                    <td>@usuario.Email</td>
+                    <td>@usuario.Perfil</td>
+                    <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-info" role="button" asp-route-id="@usuario.Id_Usuario" asp-controller="Usuario"
+                        asp-action="EditarUsuario">Editar</a>
+                        <a role="button" class="btn btn-outline-danger" asp-route-id="@usuario.Id_Usuario" asp-controller="Usuario"
+                        asp-action="ExcluirUsuario">Apagar</a>
+                    </div>
+                    </td>
+                </tr>
+            }
+                   
+          </tbody>
+    </table>
+</div>

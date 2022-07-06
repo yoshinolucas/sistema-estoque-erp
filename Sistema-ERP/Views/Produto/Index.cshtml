@@ -5,9 +5,21 @@
 
 <div class="text-center">
 
+    @if (TempData["ProdutoCriado"] != null)
+    {
+        <p class="alert alert-success">@TempData["ProdutoCriado"].ToString()</p>
+    }
+    @if (TempData["ProdutoEditado"] != null)
+    {
+        <p class="alert alert-info">@TempData["ProdutoEditado"].ToString()</p>
+    }
+    @if (TempData["ProdutoExcluido"] != null)
+    {
+        <p class="alert alert-danger">@TempData["ProdutoExcluido"].ToString()</p>
+    }
     
 
-    <h1 class="display-4">Lista de produtos</h1>
+    <h1 class="display-4 text-light">Lista de produtos</h1>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <a class="btn btn-primary" role="button" asp-controller="Produto"
@@ -15,7 +27,7 @@
     </div>
 
 
-    <table class="table table-striped mt-3">
+    <table class="table table-dark table-hover table-striped mt-3">
       <thead class="table-dark">
         <tr>
           <th scope="col">Id</th>
@@ -29,7 +41,7 @@
       <tbody>
             @foreach(var produto in Model)
             {
-                <tr>
+                <tr class="text-light">
                   <td>@produto.Id_Produto</td>
                   <td>@produto.Nome</td>
                   <td>@produto.Preco</td>
@@ -37,9 +49,9 @@
                   <td>@produto.Categoria.Nome</td>
                   <td>
                     <div class="btn-group" role="group">
-                        <a class="btn btn-warning" role="button" asp-controller="Produto"
+                        <a class="btn btn-info text-light" role="button" asp-controller="Produto"
                         asp-action="EditarProduto" asp-route-id="@produto.Id_Produto">Editar</a>
-                        <a role="button" class="btn btn-danger" asp-controller="Produto"
+                        <a role="button" class="btn btn-outline-danger" asp-controller="Produto"
                         asp-action="ExcluirProduto" asp-route-id="@produto.Id_Produto">Apagar</a>
                     </div>
                   </td>

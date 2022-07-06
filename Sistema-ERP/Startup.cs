@@ -36,6 +36,7 @@ namespace Sistema_ERP
             services.AddControllersWithViews();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();    
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 

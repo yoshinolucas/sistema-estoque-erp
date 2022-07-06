@@ -1,0 +1,51 @@
+﻿@using Sistema_ERP.Enums
+@model Usuario
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4 text-light">Editar Usuário</h1>
+    
+</div>
+
+<div class="container">
+    <form class="text-light d-grid gap-2 col-6 mx-auto" asp-controller="Usuario" asp-action="EditarUsuario" method="post">
+
+        <input asp-for="Id_Usuario" hidden/>
+        <input asp-for="Senha" hidden/>
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input class="form-control" type="text" asp-for="Nome" placeholder="Digite o nome atualizado do usuário"/>
+            @Html.ValidationMessageFor(x => x.Nome)
+        </div>
+        <div class="form-group">
+            <label for="nome">Email</label>
+            <input class="form-control" type="email" asp-for="Email" placeholder="Digite o e-mail atualizado do usuário"/>
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+        <div class="form-group">
+            <label for="login">Login</label>
+            <input type="text" asp-for="Login" class="form-control" placeholder="Digite o login atualizado do usuário"/>
+            @Html.ValidationMessageFor(x => x.Login)
+        </div>         
+        <div class="form-group">
+            <label for="perfil" class="form-label">Perfil</label>
+            <br />
+            <select asp-for="Perfil" class="form-control">       
+                <option value="Selecionar">Selecionar</option>
+                <option value="@PerfilEnum.Admin">Admin</option>
+                <option value="@PerfilEnum.Normal">Normal</option>
+            </select>
+            @Html.ValidationMessageFor(x => x.Perfil)
+        </div>
+
+        
+         <div class="d-grid gap-2 col-6 mx-auto">
+             <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+             <a class="btn btn-outline-warning btn-block" asp-controller="Usuario" asp-action="Index">Voltar</a>
+         </div>
+        
+    </form>
+</div>
