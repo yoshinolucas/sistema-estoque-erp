@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace Sistema_ERP.Models
 {
@@ -12,6 +13,10 @@ namespace Sistema_ERP.Models
         public Categoria Categoria { get; set; }
         public DateTime Data_Criada { get; set; }
         public DateTime? Data_Modificada { get; set; }
-      
+
+        internal IEnumerable ToList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

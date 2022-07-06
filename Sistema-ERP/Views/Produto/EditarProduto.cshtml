@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Produto
+@{
     ViewData["Title"] = "Editar Produto";
 }
 
@@ -9,23 +10,25 @@
 </div>
 
 <div class="container">
-    <form>
+    <form asp-controller="Produto" asp-action="EditarProduto" method="post">
+        <input asp-for="Id_Produto" hidden/>
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input class="form-control" placeholder="Digite o nome do produto"/>
+            <input asp-for="Nome" class="form-control" placeholder="Digite o nome do produto"/>
         </div>
         <div class="form-group">
             <label for="preco">Preço</label>
-            <input class="form-control" placeholder="Digite o valor do produto"/>
+            <input asp-for="Preco" class="form-control" placeholder="Digite o valor do produto"/>
+        </div>
+         <div class="form-group">
+            <label for="estoque">Estoque</label>
+            <input asp-for="Estoque" class="form-control" placeholder="Digite o estoque atualizado"/>
         </div>
         <div class="form-group">
             <label>Categoria</label>
             <br />
-            <select class="form-select" aria-label="Default select example">       
+            <select asp-for="Id_Categoria" asp-items="ViewBag.opcoesCategoria" class="form-select" aria-label="Default select example">       
                 <option selected>Selecionar</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
             </select>
         </div>
 

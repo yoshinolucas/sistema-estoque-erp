@@ -33,11 +33,11 @@ namespace Sistema_ERP.Repositories
 
         public async Task<int> DeleteAsync(int id)
         {
-            var sql = "DELETE FROM Categorias WHERE Id_Categoria = @Id";
+            var sql = "DELETE FROM Categorias WHERE Id_Categoria = @Id_Categoria";
             using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
             {
                 _connection.Open();
-                var result = await _connection.ExecuteAsync(sql, new { Id = id });
+                var result = await _connection.ExecuteAsync(sql, new { Id_Categoria = id });
                 return result;
             }
         }
@@ -55,11 +55,11 @@ namespace Sistema_ERP.Repositories
 
         public async Task<Categoria> GetByIdAsync(int id)
         {
-            var sql = "SELECT * FROM Categorias WHERE Id_Categoria = @Id";
+            var sql = "SELECT * FROM Categorias WHERE Id_Categoria = @Id_Categoria";
             using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
             {
                 _connection.Open();
-                var result = await _connection.QuerySingleOrDefaultAsync<Categoria>(sql, new { Id = id });
+                var result = await _connection.QuerySingleOrDefaultAsync<Categoria>(sql, new { Id_Categoria = id });
                 return result;
             }
         }
@@ -67,7 +67,7 @@ namespace Sistema_ERP.Repositories
         public async Task<int> UpdateAsync(Categoria categoria)
         {
             categoria.Data_Modificada = DateTime.Now;
-            var sql = "UPDATE Categorias SET Nome = @Nome, Data_Modificada = @DataModificada WHERE Id_Categoria = @Id";
+            var sql = "UPDATE Categorias SET Nome = @Nome, Data_Modificada = @Data_Modificada WHERE Id_Categoria = @Id_Categoria";
             using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
             {
                 _connection.Open();

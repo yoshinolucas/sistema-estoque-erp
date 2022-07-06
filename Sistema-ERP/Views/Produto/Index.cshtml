@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IReadOnlyList<Sistema_ERP.Models.Produto>
+@{
     ViewData["Title"] = "Produtos";
 }
 
@@ -20,39 +21,31 @@
           <th scope="col">Id</th>
           <th scope="col">Nome</th>
           <th scope="col">Preço</th>
+          <th scope="col">Estoque</th>
           <th scope="col">Categoria</th>
           <th scope="col">Opções</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>mdo</td>
-          <td>
-            <div class="btn-group" role="group">
-                <a class="btn btn-warning" role="button" asp-controller="Produto"
-                asp-action="EditarProduto">Editar</a>
-                <a role="button" class="btn btn-danger" asp-controller="Produto"
-                asp-action="ExcluirProduto">Apagar</a>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>fat</td>
-          <td>
-            <div class="btn-group" role="group">
-                <a role="button" class="btn btn-warning" asp-controller="Produto"
-                asp-action="EditarProduto">Editar</a>
-                <a role="button" class="btn btn-danger" asp-controller="Produto"
-                asp-action="ExcluirProduto">Apagar</a>
-            </div>
-          </td>
-        </tr>
+            @foreach(var produto in Model)
+            {
+                <tr>
+                  <td>@produto.Id_Produto</td>
+                  <td>@produto.Nome</td>
+                  <td>@produto.Preco</td>
+                  <td>@produto.Estoque</td>
+                  <td>@produto.Categoria.Nome</td>
+                  <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-warning" role="button" asp-controller="Produto"
+                        asp-action="EditarProduto" asp-route-id="@produto.Id_Produto">Editar</a>
+                        <a role="button" class="btn btn-danger" asp-controller="Produto"
+                        asp-action="ExcluirProduto" asp-route-id="@produto.Id_Produto">Apagar</a>
+                    </div>
+                  </td>
+                </tr>      
+            }
+            
       </tbody>
     </table>
 </div>

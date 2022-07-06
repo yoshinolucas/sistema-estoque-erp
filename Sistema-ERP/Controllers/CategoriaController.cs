@@ -34,15 +34,30 @@ namespace Sistema_ERP.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditarCategoria()
+        public async Task<IActionResult> EditarCategoria(int id)
         {
-            return View();
+            Categoria categoria = await _unitOfWork.Categorias.GetByIdAsync(id);
+            return View(categoria);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarCategoria(Categoria categoria)
+        {
+            await _unitOfWork.Categorias.UpdateAsync(categoria);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult ExcluirCategoria()
+        public async Task<IActionResult> ExcluirCategoria(int id)
         {
-            return View();
+            Categoria categoria = await _unitOfWork.Categorias.GetByIdAsync(id);
+            return View(categoria);
+        }
+
+        public async Task<IActionResult> ExcluirCategoriaDefinitivo(int id)
+        {
+            await _unitOfWork.Categorias.DeleteAsync(id);
+            return RedirectToAction("Index");
         }
     }
 }
