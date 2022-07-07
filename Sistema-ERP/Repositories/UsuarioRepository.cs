@@ -21,6 +21,7 @@ namespace Sistema_ERP.Repositories
         public async Task<int> AddAsync(Usuario usuario)
         {
             usuario.Data_Criada = DateTime.Now;
+            usuario.SetSenhaHash();
             var sql = @"Insert into Usuarios (Nome, Login, Email, Senha, Perfil, Data_Criada)
                         VALUES (@Nome, @Login, @Email, @Senha, @Perfil, @Data_Criada)";
             using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))

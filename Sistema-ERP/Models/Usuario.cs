@@ -1,4 +1,5 @@
 ﻿using Sistema_ERP.Enums;
+using Sistema_ERP.Helper;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,7 +22,12 @@ namespace Sistema_ERP.Models
 
         public bool SenhaValida(string senha)
         {
-            return Senha == senha;
+            return Senha == senha.GerarHash();
+        }
+
+        public void SetSenhaHash()
+        {
+            Senha = Senha.GerarHash();
         }
     }
 }
