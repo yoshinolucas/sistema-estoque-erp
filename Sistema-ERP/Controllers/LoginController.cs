@@ -11,10 +11,12 @@ namespace Sistema_ERP.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISessao _sessao;
-        public LoginController(IUnitOfWork unitOfWork, ISessao sessao)
+        private readonly IEmail _email;
+        public LoginController(IUnitOfWork unitOfWork, ISessao sessao, IEmail email)
         {
             _unitOfWork = unitOfWork;
             _sessao = sessao;
+            _email = email;
         }
 
         [HttpGet]
@@ -54,6 +56,42 @@ namespace Sistema_ERP.Controllers
                 TempData["MensagemErro"] = $"Usuário e/ou senha inválido(s). Por favor, tente novamente.";
             }           
             return View("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EnviarLinkParaRedefinirSenha(RedefinirSenhaModel rsm)
+        {
+            if (ModelState.IsValid)
+            {
+                Usuario usuario = await _unitOfWork.
+                    Usuarios
+                    .GetByEmailLoginAsync(rsm.Email, rsm.Login);
+                if (usuario != null)
+                {
+                    string novaSenha = usuario.GerarNovaSenha();
+                    
+                    string mensagem = $"Sua nova senha é: {novaSenha}";
+                    bool emailEnviado = _email.Enviar(usuario.Email, "Sistema ERP - Nova Senha", mensagem);
+
+                    if (emailEnviado)
+                    {
+                        await _unitOfWork.Usuarios.UpdateSenhaAsync(usuario);
+                        TempData["MensagemSucesso"] = $"Enviamos uma nova senha para o seu e-mail.";
+                    }
+                    else
+                    {
+                        TempData["MensagemErro"] = $"Não conseguimos enviar o e-mail, favor tentar novamente";
+                    }        
+                    RedirectToAction("Index", "Login");
+                }
+                TempData["MensagemErro"] = $"Usuário e/ou e-mail inválido(s). Por favor, verifique seus dados.";
+            }
+            return View("Index");
+        }
+
+        public IActionResult RedefinirSenha()
+        {
+            return View();
         }
     }
 }

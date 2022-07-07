@@ -54,6 +54,21 @@ namespace Sistema_ERP.Repositories
             }
         }
 
+        public async Task<Usuario> GetByEmailLoginAsync(string email, string login)
+        {
+            var sql = $"SELECT * FROM Usuarios WHERE (Login = @Login AND Email = @Email);";
+            using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                _connection.Open();
+                var result = await _connection.QuerySingleOrDefaultAsync<Usuario>(sql, new
+                {
+                    Email = email,
+                    Login = login
+                });
+                return result;
+            }
+        }
+
         public async Task<Usuario> GetByIdAsync(int id)
         {
             var sql = "SELECT * FROM Usuarios WHERE Id_Usuario = @Id_Usuario";
@@ -80,6 +95,17 @@ namespace Sistema_ERP.Repositories
         {
             usuario.Data_Modificada = DateTime.Now;
             var sql = "UPDATE Usuarios SET Nome = @Nome, Email = @Email, Login = @Login, Perfil = @Perfil, Data_Modificada = @Data_Modificada  WHERE Id_Usuario = @Id_Usuario";
+            using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                _connection.Open();
+                var result = await _connection.ExecuteAsync(sql, usuario);
+                return result;
+            }
+        }
+
+        public async Task<int> UpdateSenhaAsync(Usuario usuario)
+        {
+            var sql = "UPDATE Usuarios SET Senha = @Senha WHERE Id_Usuario = @Id_Usuario";
             using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
             {
                 _connection.Open();

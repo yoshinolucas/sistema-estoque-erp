@@ -1,0 +1,26 @@
+﻿@model RedefinirSenhaModel
+@{
+	Layout = "_Login";
+	ViewData["Title"] = "Redifinir Senha";
+}
+
+<div class="d-grid gap-2 col-6 mx-auto">
+	<form asp-controller="Login" asp-action="EnviarLinkParaRedefinirSenha" method="post" class="text-light">
+      <div class="mb-3">
+        <label for="login" class="form-label">Login</label>
+        <input type="text" asp-for="Login" class="form-control" id="login">
+        @Html.ValidationMessageFor(x => x.Login)
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="text" asp-for="Email" class="form-control" id="email">
+        @Html.ValidationMessageFor(x => x.Email)
+      </div>
+      
+      <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="submit" class="btn btn-primary btn-block">Confirmar</button>
+         <a class="btn btn-outline-warning btn-block" asp-controller="Login" asp-action="Index">Voltar</a>
+      </div>
+      
+    </form>
+</div>

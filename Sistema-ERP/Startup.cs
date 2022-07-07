@@ -37,12 +37,14 @@ namespace Sistema_ERP
 
             services.AddControllersWithViews();
 
+            
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();    
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISessao, Sessao>();
+            services.AddScoped<IEmail, Email>();
 
             services.AddSession(o =>
             {
