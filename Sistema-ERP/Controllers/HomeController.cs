@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Sistema_ERP.Filters;
 using Sistema_ERP.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sistema_ERP.Controllers
 {
+    [PagUsuarioLogado]
     public class HomeController : Controller
     {       
         public IActionResult Index()

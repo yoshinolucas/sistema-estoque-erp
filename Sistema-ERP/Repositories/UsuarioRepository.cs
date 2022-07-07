@@ -64,6 +64,17 @@ namespace Sistema_ERP.Repositories
             }
         }
 
+        public async Task<Usuario> GetByLoginAsync(string login)
+        {
+            var sql = "SELECT * FROM Usuarios WHERE Login = @Login";
+            using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                _connection.Open();
+                var result = await _connection.QuerySingleOrDefaultAsync<Usuario>(sql, new { Login = login });
+                return result;
+            }
+        }
+
         public async Task<int> UpdateAsync(Usuario usuario)
         {
             usuario.Data_Modificada = DateTime.Now;

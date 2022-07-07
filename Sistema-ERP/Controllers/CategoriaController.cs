@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sistema_ERP.Filters;
 using Sistema_ERP.Interfaces;
 using Sistema_ERP.Models;
 using System;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sistema_ERP.Controllers
 {
+    [PagUsuarioLogado]
     public class CategoriaController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Sistema_ERP.Filters;
 using Sistema_ERP.Interfaces;
 using Sistema_ERP.Models;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sistema_ERP.Controllers
 {
+    [PagUsuarioLogado]
     public class ProdutoController : Controller
     {
         private readonly IUnitOfWork _inutOfWork;

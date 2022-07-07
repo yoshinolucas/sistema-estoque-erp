@@ -18,5 +18,10 @@ namespace Sistema_ERP.Models
         public PerfilEnum Perfil { get; set; }
         public DateTime Data_Criada { get; set; }
         public DateTime? Data_Modificada { get; set; }
+
+        public bool SenhaValida(string senha)
+        {
+            return Senha == senha;
+        }
     }
 }

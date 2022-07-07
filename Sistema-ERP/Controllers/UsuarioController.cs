@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sistema_ERP.Filters;
 using Sistema_ERP.Interfaces;
 using Sistema_ERP.Models;
 using System.Threading.Tasks;
 
 namespace Sistema_ERP.Controllers
 {
+    [PagRestritaOnlyAdmin]
     public class UsuarioController : Controller
     {
         private IUnitOfWork _unitOfWork;

@@ -1,0 +1,22 @@
+﻿@model LoginModel
+@{
+	Layout = "_Login";
+	ViewData["Title"] = "Login";
+}
+
+<div class="d-grid gap-2 col-6 mx-auto">
+	<form asp-controller="Login" asp-action="Entrar" method="post" class="text-light">
+      <div class="mb-3">
+        <label for="login" class="form-label">Login</label>
+        <input type="text" asp-for="Login" class="form-control" id="login">
+        @Html.ValidationMessageFor(x => x.Login)
+      </div>
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input type="password" asp-for="Senha" class="form-control" id="senha">
+        @Html.ValidationMessageFor(x => x.Senha)
+      </div>  
+      <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+</div>
+
