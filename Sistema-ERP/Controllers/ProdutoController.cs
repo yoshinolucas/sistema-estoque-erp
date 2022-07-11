@@ -12,6 +12,7 @@ namespace Sistema_ERP.Controllers
     public class ProdutoController : Controller
     {
         private readonly IUnitOfWork _inutOfWork;
+        private const int PAGE_SIZE = 5;
         public ProdutoController(IUnitOfWork inutOfWork)
         {
             _inutOfWork = inutOfWork;

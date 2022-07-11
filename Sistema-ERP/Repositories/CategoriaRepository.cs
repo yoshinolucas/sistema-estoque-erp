@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Sistema_ERP.Interfaces;
 using Sistema_ERP.Models;
@@ -45,11 +46,12 @@ namespace Sistema_ERP.Repositories
         public async Task<IReadOnlyList<Categoria>> GetAllAsync()
         {
             var sql = "SELECT * FROM Categorias";
+                        
             using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
             {
                 _connection.Open();
-                var result = await _connection.QueryAsync<Categoria>(sql);
-                    return result.ToList();
+                var result = await _connection.QueryAsync<Categoria>(sql);                           
+                return result.ToList();
             }
         }
 
@@ -73,6 +75,39 @@ namespace Sistema_ERP.Repositories
                 _connection.Open();
                 var result = await _connection.ExecuteAsync(sql, categoria);
                 return result;
+            }
+        }
+
+        public async Task<IReadOnlyList<Categoria>> GetByNomeSearchAsync(string nome)
+        {
+            var sql = "SELECT * FROM Categorias WHERE Nome LIKE CONCAT('%',@nome,'%');";
+            using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                _connection.Open();
+                var result = await _connection.QueryAsync<Categoria>(sql, new {nome});
+                return result.ToList();
+            }
+        }
+
+        public async Task<IReadOnlyList<Categoria>> GetByNomeAsync()
+        {
+            var sql = "SELECT * FROM Categorias ORDER BY Nome";
+            using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                _connection.Open();
+                var result = await _connection.QueryAsync<Categoria>(sql);
+                return result.ToList();
+            }
+        }
+
+        public async Task<IReadOnlyList<Categoria>> GetByNomeDescAsync()
+        {
+            var sql = "SELECT * FROM Categorias ORDER BY Nome DESC";
+            using (var _connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                _connection.Open();
+                var result = await _connection.QueryAsync<Categoria>(sql);
+                return result.ToList();
             }
         }
     }

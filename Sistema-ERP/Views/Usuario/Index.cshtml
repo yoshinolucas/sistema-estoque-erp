@@ -21,10 +21,16 @@
 
     <h1 class="display-4 text-light">Lista de usuários</h1>
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-2">
         <a class="btn btn-primary" role="button" asp-controller="Usuario"
         asp-action="CriarUsuario">Novo Usuário</a>
     </div>
+
+    <form class="form-inline my-2 my-lg-0" action="/Index" method="get"
+    id="formBusca">
+    <input type="text" name="q" placeholder="Nome do usuário" class="form-control mr-sm-2"/>
+    <button class="btn btn-success my-2 my-sm-0">Buscar</button>
+    </form>
 
 
     <table class="table table-dark table-hover table-striped mt-3">

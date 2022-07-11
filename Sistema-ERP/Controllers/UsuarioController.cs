@@ -10,6 +10,7 @@ namespace Sistema_ERP.Controllers
     public class UsuarioController : Controller
     {
         private IUnitOfWork _unitOfWork;
+        private const int PAGE_SIZE = 5;
         public UsuarioController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
