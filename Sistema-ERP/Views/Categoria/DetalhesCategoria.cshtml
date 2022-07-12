@@ -9,22 +9,23 @@
     
 </div>
 
-<div class="container text-center">
-    <form class="d-grid gap-2 col-6 mx-auto text-light" asp-controller="Categoria" asp-action="EditarCategoria" method="post">
+<div class="container">
+    <form class="px-4 pt-4 pb-3 mt-5 border d-grid gap-2 col-6 mx-auto text-light" asp-controller="Categoria" asp-action="EditarCategoria" method="post">
         <input asp-for="Id_Categoria" hidden/>
         <div class="form-group">
-            <label>Id da Categoria</label>
+            <label class="h5">Id da Categoria:</label>
             <p>@Model.Id_Categoria</p>
-            <label>Nome da Categoria</label>
+            <label class="h5">Nome da Categoria:</label>
             <p>@Model.Nome</p>
-            <label>Data do cadastro</label>
+            <label class="h5">Data do cadastro:</label>
             <p>@Model.Data_Criada</p>          
             @if(Model.Data_Modificada != null)
             {
-                <label>Última atualização</label>
+                <label class="h5">Última atualização:</label>
                 <p>@Model.Data_Modificada</p>
             }           
-        </div>    
+        </div> 
+        <hr style="width: 100%; color: white; height: 0.5px; background-color:white;" />
         <div class="d-grid gap-2 col-6 mx-auto">
             <a class="btn btn-outline-warning btn-block" asp-controller="Categoria" asp-action="Index">Voltar</a>
         </div>

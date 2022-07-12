@@ -20,17 +20,43 @@
     
 
     <h1 class="display-4 text-light">Lista de produtos</h1>
+    <hr style="width: 100%; color: white; height: 0.5px; background-color:white;" />
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-2">
-        <a class="btn btn-primary" role="button" asp-controller="Produto"
-        asp-action="CriarProduto">Novo Produto</a>
+    <div>
+        <div class="text-light mb-3">
+        <form method="get" asp-controller="Produto" asp-action="Index" class="form-inline my-3 float-right">
+            <label>Ordem de exibição:</label>&nbsp;
+            <select name="ordem" class="form-control form-control mr-sm-1">
+                <option name="ordem" value="0">Selecionar</option>
+                <option name="ordem" value="1">A-Z</option>
+                <option name="ordem" value="2">Z-A</option>
+                <option name="ordem" value="2">Maior preço</option>
+                <option name="ordem" value="2">Menor preço</option>
+                <option name="ordem" value="2">Maior estoque</option>
+                <option name="ordem" value="2">Menor estoque</option>
+                <option name="ordem" value="2">Categoria A-Z</option>
+                <option name="ordem" value="2">Categoria Z-A</option>
+            </select>
+            <input value="Filtrar" type="submit" class="btn btn-success my-2 my-sm-0" />
+        </form>
+        </div>
     </div>
 
-    <form class="form-inline my-2 my-lg-0" action="/Index" method="get"
-    id="formBusca">
-    <input type="text" name="q" placeholder="Nome do produto" class="form-control mr-sm-2"/>
-    <button class="btn btn-success my-2 my-sm-0">Buscar</button>
-    </form>
+    <div>      
+            <div class="float-left my-3">
+                <a class="btn btn-primary" role="button" asp-controller="Produto"
+                asp-action="CriarProduto"><i class="fa-solid fa-plus mr-1"></i>Novo Produto</a>
+            </div>
+
+            <div class="float-left my-3 ml-3">
+                <form class="form-inline" action="/Index" method="get"
+                id="formBusca">
+                <input type="text" name="q" placeholder="Nome do produto" class="form-control mr-sm-1"/>
+                <button class="btn btn-success my-2 my-sm-0"><i class="fa fa-search"></i></button>
+                </form>     
+            </div>          
+    </div>
+    
 
 
     <table class="table table-dark table-hover table-striped mt-3">
@@ -55,10 +81,14 @@
                   <td>@produto.Categoria.Nome</td>
                   <td>
                     <div class="btn-group" role="group">
+                        <a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Mais detalhes do produto" role="button" asp-route-id="@produto.Id_Produto" asp-controller="Produto"
+                        asp-action="DetalhesProduto">
+                        <i class="fa-solid fa-circle-info mx-1"></i>
+                        Info</a>
                         <a class="btn btn-info text-light" role="button" asp-controller="Produto"
-                        asp-action="EditarProduto" asp-route-id="@produto.Id_Produto">Editar</a>
+                        asp-action="EditarProduto" asp-route-id="@produto.Id_Produto"><i class="fa fa-edit"></i></a>
                         <a role="button" class="btn btn-outline-danger" asp-controller="Produto"
-                        asp-action="ExcluirProduto" asp-route-id="@produto.Id_Produto">Apagar</a>
+                        asp-action="ExcluirProduto" asp-route-id="@produto.Id_Produto"><i class="fa fa-trash"></i></a>
                     </div>
                   </td>
                 </tr>      

@@ -28,37 +28,45 @@
     
 
     <h1 class="display-4 text-light">Lista de categorias</h1>
+    <hr style="width: 100%; color: white; height: 0.5px; background-color:white;" />
 
-    <partial name="_Pager" model="@pager" />
-
-    <div class="text-light col-12 mb-3">
-        <form method="get" asp-controller="Categoria" asp-action="Index" class="form-inline float-right">
+    <div>
+        <div class="text-light">
+        <form method="get" asp-controller="Categoria" asp-action="Index" class="form-inline my-3 float-right">
             <label>Ordem de exibição:</label>&nbsp;
-            <select name="ordem" class="form-control custom-select-sm">
+            <select name="ordem" class="form-control form-control mr-sm-1">
                 <option name="ordem" value="0">Selecionar</option>
                 <option name="ordem" value="1">A-Z</option>
                 <option name="ordem" value="2">Z-A</option>
             </select>
-            <input value="Filtrar" type="submit" class="btn-sm btn-success my-2 my-sm-0" />
+            <input value="Filtrar" type="submit" class="btn btn-success my-2 my-sm-0" />
         </form>
+        </div>
     </div>
 
+      
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-2">
+    <div> 
+        <div class="float-left my-3">
         <a class="btn btn-primary" role="button" asp-controller="Categoria"
-        asp-action="CriarCategoria">Nova Categoria</a>
+        asp-action="CriarCategoria"><i class="fa-solid fa-plus mr-1"></i>Nova Categoria</a>
+        </div>
+
+        <div class="float-left my-3 ml-3">
+             <form class="form-inline" 
+                asp-controller="Categoria" 
+                asp-action="Index"
+                method="get">
+                    <input type="search" name="searchText" placeholder="Nome da categoria" class="form-control mr-sm-1"/>
+                    <input type="hidden" name="ordem" value="0" />
+                    <button type="submit" class="btn btn-success my-2 my-sm-0"><i class="fa fa-search"></i></button> 
+             </form>
+        </div>
+       
     </div>
 
-    <form class="form-inline my-2 my-lg-0" 
-    asp-controller="Categoria" 
-    asp-action="Index"
-    method="get">
-    <span class="btn-group">
-        <input type="search" name="searchText" placeholder="Nome da categoria" class="form-control mr-sm-2"/>
-        <input type="hidden" name="ordem" value="0" />
-        <input value="Pesquisar" type="submit" class="btn-sm btn-success my-2 my-sm-0" />
-    </span>   
-    </form>
+    
+    
 
 
     <table class="table table-dark table-hover table-striped mt-3">
@@ -66,7 +74,10 @@
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Nome</th>
+          <th scope="col">Data do cadastro</th>
+          <th scope="col">Última atualização</th>
           <th scope="col">Opções</th>
+          
           
         </tr>
       </thead>
@@ -76,14 +87,20 @@
                 <tr class="text-light">
                     <td>@categoria.Id_Categoria</td>
                     <td>@categoria.Nome</td>
+                    <td>@categoria.Data_Criada</td>
+                    <td>@categoria.Data_Modificada</td>
                     <td>
                     <div class="btn-group" role="group">
-                        <a class="btn btn-success" role="button" asp-route-id="@categoria.Id_Categoria" asp-controller="Categoria"
-                        asp-action="DetalhesCategoria">Detalhes</a>
-                        <a class="btn btn-info" role="button" asp-route-id="@categoria.Id_Categoria" asp-controller="Categoria"
-                        asp-action="EditarCategoria">Editar</a>
-                        <a role="button" class="btn btn-outline-danger" asp-route-id="@categoria.Id_Categoria" asp-controller="Categoria"
-                        asp-action="ExcluirCategoria">Apagar</a>
+                        <a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Mais detalhes da categoria" role="button" asp-route-id="@categoria.Id_Categoria" asp-controller="Categoria"
+                        asp-action="DetalhesCategoria">
+                        <i class="fa-solid fa-circle-info mx-1"></i>
+                        Info</a>
+                        <a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Alterar dados da categoria" role="button" asp-route-id="@categoria.Id_Categoria" asp-controller="Categoria"
+                        asp-action="EditarCategoria">
+                        <i class="fa fa-edit"></i>
+                        </a>
+                        <a role="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Excluir categoria" asp-route-id="@categoria.Id_Categoria" asp-controller="Categoria"
+                        asp-action="ExcluirCategoria"><i class="fa fa-trash"></i></a>
                     </div>
                     </td>
                 </tr>

@@ -3,24 +3,38 @@
 	Layout = "_Login";
 	ViewData["Title"] = "Redefinir Senha";
 }
+<div class="container">
 
-<div class="d-grid gap-2 col-6 mx-auto">
-	<form asp-controller="Login" asp-action="EnviarLinkParaRedefinirSenha" method="post" class="text-light">
-      <div class="mb-3">
-        <label for="login" class="form-label">Login</label>
-        <input type="text" asp-for="Login" class="form-control" id="login">
-        @Html.ValidationMessageFor(x => x.Login)
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">E-mail</label>
-        <input type="text" asp-for="Email" class="form-control" id="email">
-        @Html.ValidationMessageFor(x => x.Email)
-      </div>
+    <p class="h1 mt-5 text-light text-center">Redefinição de senha</p>
+    
+	<div class="d-grid gap-2 mt-4 col-6 mx-auto">
+        <p class="text-center text-light">Etapa 1: Informar seu usuário de login & e-mail.</p>
+	    <form asp-controller="Login" asp-action="EnviarLinkParaRedefinirSenha" method="post" class="p-5 border text-light">
+          <div class="mb-3">
+            <label for="login" class="form-label">Username</label>
+            <input type="text" asp-for="Login" class="form-control" id="login" placeholder="Digite seu usuário de login">
+            @Html.ValidationMessageFor(x => x.Login)
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="text" asp-for="Email" class="form-control" id="email" placeholder="Digite seu e-mail de cadastro">
+            @Html.ValidationMessageFor(x => x.Email)
+          </div>
+
+          <p class="mb-4 text-sm mx-auto">
+              
+          </p>
       
-      <div class="d-grid gap-2 col-6 mx-auto">
-          <button type="submit" class="btn btn-primary btn-block">Confirmar</button>
-         <a class="btn btn-outline-warning btn-block" asp-controller="Login" asp-action="Index">Voltar</a>
-      </div>
+          <div class="d-grid gap-2 col-6 mx-auto">
+              <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+             <a class="btn btn-outline-warning btn-block" asp-controller="Login" asp-action="Index">Voltar</a>
+          </div>
       
-    </form>
+        </form>
+
+        <p class="text-light mb-4 mt-3 text-sm mx-auto">
+              Etapa 2: Uma nova senha será enviada para o seu e-mail de cadastro.
+         </p>
+    </div>
 </div>
+

@@ -1,7 +1,7 @@
 ﻿@using Sistema_ERP.Enums
 @model Usuario
 
-<a class="navbar-brand mb-0 h1" asp-area="" asp-controller="Home" asp-action="Index">Olá, @Model.Nome</a>
+<a class="navbar-brand mb-0 h1" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-coins mx-1"></i>Haz</a>
 <button 
 class="navbar-toggler" 
 type="button" 
@@ -15,16 +15,14 @@ aria-label="Toggle navigation">
 
 <div class="collapse navbar-collapse" 
 id="navbarNav">
-    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-        <li class="nav-item active">
-            <a class="nav-link mx-2" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-        </li>
+    <ul class="navbar-nav ml-auto mb-2 mb-lg-0 ">       
         <li class="nav-item active">
             <a class="nav-link mx-2" aria-current="page" asp-area="" asp-controller="Produto" asp-action="Index">Produtos</a>
         </li>
         <li class="nav-item active">
             <a class="nav-link mx-2" aria-current="page" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
         </li>
+        
         
         @if (Model.Perfil == PerfilEnum.Admin)
         {
@@ -34,7 +32,11 @@ id="navbarNav">
         }
 
         <li class="nav-item active">
-            <a class="nav-link active mx-2" aria-current="page" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a>
+            <a class="nav-link ml-4 mr-1" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-user-tie mx-1"></i>Olá, @Model.Nome</a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link active ml-1" aria-current="page" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a>
         </li>
     </ul>
 </div>
